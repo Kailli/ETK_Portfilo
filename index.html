@@ -1,618 +1,1263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eaint Thwin Kyaw</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eaint Thwin Kyaw | Python Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f2eefb;
+      --bg-soft: #fcfaff;
+      --surface: rgba(255, 255, 255, 0.92);
+      --surface-strong: #ffffff;
+      --ink: #231a33;
+      --muted: #665d79;
+      --line: rgba(35, 26, 51, 0.08);
+      --brand: #8a63d2;
+      --brand-deep: #6646a8;
+      --accent: #7b57c8;
+      --accent-soft: #ebe1ff;
+      --warm: #c88cf4;
+      --shadow: 0 24px 70px rgba(90, 63, 146, 0.14);
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <!-- bootstrap css -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    body {
+      min-height: 100vh;
+      padding: 28px;
+      font-family: "Manrope", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(138, 99, 210, 0.16), transparent 30%),
+        radial-gradient(circle at 100% 0%, rgba(123, 87, 200, 0.14), transparent 28%),
+        linear-gradient(145deg, #fbf8ff, var(--bg) 55%, #f0eafe);
+    }
 
-    <!-- css -->
-    <link rel="stylesheet" href="style.css">
-    
-     <!-- font awesone -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    .portfolio {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 34px;
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
 
-    
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 28px;
+      padding: 54px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.5)),
+        linear-gradient(120deg, rgba(138, 99, 210, 0.1), rgba(123, 87, 200, 0.08));
+      position: relative;
+      overflow: hidden;
+    }
 
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -80px -90px auto;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(124, 123, 173, 0.16), transparent 66%);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    h1 {
+      font-family: "Sora", sans-serif;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      margin-bottom: 18px;
+      max-width: 640px;
+    }
+
+    .role {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(123, 87, 200, 0.1);
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+
+    .summary {
+      max-width: 680px;
+      font-size: 17px;
+      line-height: 1.82;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .button,
+    .ghost-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button {
+      background: linear-gradient(135deg, var(--accent), #5f39af);
+      color: #ffffff;
+      box-shadow: 0 16px 28px rgba(123, 87, 200, 0.24);
+    }
+
+    .ghost-button {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--brand-deep);
+      border: 1px solid rgba(124, 123, 173, 0.16);
+    }
+
+    .button:hover,
+    .ghost-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 720px;
+    }
+
+    .metric {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(22, 33, 29, 0.06);
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 24px;
+      color: var(--ink);
+    }
+
+    .metric span {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .hero-card {
+      position: relative;
+      z-index: 1;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 22px;
+      padding: 28px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, #ffffff, #faf7ff);
+      border: 1px solid rgba(35, 26, 51, 0.08);
+      box-shadow: 0 18px 34px rgba(90, 63, 146, 0.08);
+    }
+
+    .avatar-row {
+      display: grid;
+      gap: 18px;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 360px;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+      border: 3px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 18px 32px rgba(94, 91, 147, 0.18);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .avatar::after {
+      content: "View";
+      position: absolute;
+      inset: auto 8px 8px auto;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(22, 33, 29, 0.78);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .avatar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 36px rgba(94, 91, 147, 0.22);
+    }
+
+    .avatar:hover img {
+      transform: scale(1.08);
+      filter: saturate(1.05);
+    }
+
+    .avatar:hover::after,
+    .avatar:focus-visible::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .avatar:focus-visible {
+      outline: 3px solid rgba(123, 87, 200, 0.3);
+      outline-offset: 3px;
+    }
+
+    .intro-name {
+      font-family: "Sora", sans-serif;
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .intro-sub {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .intro-block {
+      padding: 0 4px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-line {
+      display: grid;
+      gap: 4px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(22, 33, 29, 0.06);
+    }
+
+    .contact-line:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .contact-line strong {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+    }
+
+    .contact-line span,
+    .contact-line a {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink);
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .contact-detail {
+      display: block;
+    }
+
+    .remember-card {
+      padding: 22px 24px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(123, 87, 200, 0.08), rgba(255, 255, 255, 0.96));
+      border: 1px solid rgba(123, 87, 200, 0.12);
+      box-shadow: 0 14px 28px rgba(90, 63, 146, 0.06);
+    }
+
+    .remember-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--brand-deep);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .remember-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.72;
+    }
+
+    .note-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .note-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .remember-contact {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .remember-contact span,
+    .remember-contact a {
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.65;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      padding: 0 54px 54px;
+    }
+
+    .section {
+      padding: 28px;
+      border-radius: 26px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 34px rgba(22, 33, 29, 0.04);
+    }
+
+    .section.wide {
+      grid-column: 1 / -1;
+    }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      font-size: 21px;
+      color: var(--ink);
+    }
+
+    h2 span {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 7px var(--accent-soft);
+    }
+
+    .section-intro {
+      color: var(--muted);
+      line-height: 1.72;
+      margin-bottom: 20px;
+    }
+
+    .experience-grid,
+    .projects-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .experience-item {
+      padding: 20px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #fcfbff, #ffffff);
+      border: 1px solid rgba(123, 87, 200, 0.14);
+    }
+
+    .experience-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      align-items: baseline;
+    }
+
+    .experience-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .experience-duration {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    ul {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #f5efff;
+      border: 1px solid rgba(123, 87, 200, 0.16);
+      color: #5b3798;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .fact-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #f8fbfa, #ffffff);
+      border: 1px solid rgba(22, 33, 29, 0.06);
+    }
+
+    .fact-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--brand-deep);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .fact-card p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .app-card {
+      padding: 22px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #fcfaff, #ffffff);
+      border: 1px solid rgba(123, 87, 200, 0.12);
+      box-shadow: 0 12px 24px rgba(90, 63, 146, 0.05);
+    }
+
+    .app-card h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .app-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.72;
+      margin-bottom: 12px;
+    }
+
+    .app-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), #5f39af);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 14px 24px rgba(123, 87, 200, 0.2);
+    }
+
+    .shot-card {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(22, 33, 29, 0.08);
+      background: var(--surface-strong);
+      box-shadow: 0 12px 24px rgba(22, 33, 29, 0.05);
+      align-self: start;
+      position: relative;
+    }
+
+    .shot-copy {
+      padding: 24px 22px 22px;
+    }
+
+    .shot-copy::before {
+      content: "";
+      display: block;
+      width: 52px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(123, 87, 200, 0.95), rgba(176, 133, 255, 0.7));
+      margin-bottom: 16px;
+    }
+
+    .shot-copy h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .shot-copy p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .shot-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .shot-meta span {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: #f4f8f6;
+      color: #355145;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid rgba(22, 33, 29, 0.06);
+    }
+
+    .note {
+      grid-column: 1 / -1;
+      padding: 28px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #3f2b68, #5d3d93);
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .note p {
+      max-width: 780px;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.75;
+    }
+
+    .signature-section {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .signature-card,
+    .signature-highlight {
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid rgba(22, 33, 29, 0.08);
+    }
+
+    .signature-card {
+      background: linear-gradient(180deg, #fbfefd, #ffffff);
+    }
+
+    .signature-label {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(124, 123, 173, 0.1);
+      color: var(--brand-deep);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .signature-quote {
+      font-family: "Sora", sans-serif;
+      font-size: 28px;
+      line-height: 1.35;
+      color: var(--ink);
+      margin-bottom: 14px;
+      letter-spacing: -0.03em;
+    }
+
+    .signature-text {
+      color: var(--muted);
+      line-height: 1.78;
+      font-size: 15px;
+    }
+
+    .signature-highlight {
+      background: linear-gradient(135deg, #4a3278, #6b47a8);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .signature-highlight strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .signature-highlight p {
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 15px;
+    }
+
+    .signature-name {
+      font-family: "Sora", sans-serif;
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .note .button {
+      border: none;
+      cursor: pointer;
+      background: #ffffff;
+      color: #3f2b68;
+      box-shadow: none;
+    }
+
+    .footer {
+      padding: 24px 28px 30px;
+      text-align: center;
+      font-size: 14px;
+      color: #72807a;
+      border-top: 1px solid rgba(22, 33, 29, 0.06);
+    }
+
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      background: rgba(8, 14, 12, 0.82);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+    }
+
+    .image-modal.open {
+      display: flex;
+    }
+
+    .image-modal-content {
+      position: relative;
+      max-width: min(92vw, 1100px);
+      max-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-modal-content img {
+      max-width: 100%;
+      max-height: 92vh;
+      border-radius: 24px;
+      display: block;
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.34);
+    }
+
+    .image-modal-close {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #18221f;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .message-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      background: rgba(34, 22, 58, 0.62);
+      backdrop-filter: blur(10px);
+      z-index: 10000;
+    }
+
+    .message-modal.open {
+      display: flex;
+      animation: modalFadeIn 0.28s ease;
+    }
+
+    .message-modal-card {
+      width: min(100%, 560px);
+      padding: 30px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, #ffffff, #faf5ff);
+      border: 1px solid rgba(123, 87, 200, 0.14);
+      box-shadow: 0 30px 70px rgba(56, 34, 102, 0.22);
+      transform: translateY(16px) scale(0.98);
+      opacity: 0;
+      animation: modalCardIn 0.32s ease forwards;
+    }
+
+    .message-modal-label {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(123, 87, 200, 0.1);
+      color: var(--brand-deep);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .message-modal-card h3 {
+      margin-bottom: 12px;
+      font-size: 28px;
+      line-height: 1.2;
+      color: var(--ink);
+      font-family: "Sora", sans-serif;
+      letter-spacing: -0.03em;
+    }
+
+    .message-modal-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .message-modal-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .message-close-btn {
+      border: none;
+      min-height: 44px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), #5f39af);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 14px 24px rgba(123, 87, 200, 0.2);
+    }
+
+    .message-quick-link {
+      color: var(--brand-deep);
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes modalCardIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 980px) {
+      body {
+        padding: 16px;
+      }
+
+      .hero,
+      .content {
+        grid-template-columns: 1fr;
+        padding-left: 28px;
+        padding-right: 28px;
+      }
+
+      .content {
+        padding-bottom: 36px;
+      }
+
+      .hero-copy {
+        height: auto;
+      }
+
+      .hero-metrics,
+      .note-grid,
+      .signature-section,
+      .apps-grid,
+      .screenshots,
+      .facts-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (max-width: 680px) {
+      .hero,
+      .content {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .screen-top,
+      .screen-stats,
+      .table-row {
+        grid-template-columns: 1fr;
+      }
+
+      .note {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .avatar {
+        height: 300px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+    }
+  </style>
 </head>
 <body>
-            <!-- navbar section -->
-            <nav class="navbar sticky-top sticky-md-top navbar-expand-lg navbar-light bg-nav">
+  <main class="portfolio">
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>Eaint Thwin Kyaw</h1>
+        <p class="role">Senior Odoo Developer / Python Developer</p>
+        <p class="summary">
+          Senior Odoo Developer with strong experience in ERP customization, module development, system integration, and business workflow solutions. Fast learner with strong problem-solving skills and the ability to quickly adapt to new technologies and project requirements. Passionate about creating reliable, scalable, and efficient solutions while continuously exploring new experiences and improving technical expertise. Dependable team player with a proactive mindset and strong commitment to delivering high-quality results.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="file:///D:/etk/my_data/ETK.pdf" target="_blank" rel="noopener noreferrer">Open CV</a>
+          <a class="ghost-button" href="http://www.linkedin.com/in/eaint-thwin-kyaw" target="_blank" rel="noopener noreferrer">View LinkedIn</a>
+        </div>
+        <div class="hero-metrics">
+          <div class="metric">
+            <strong>4+ Years</strong>
+            <span>Combined professional experience across business system and Odoo-related environments.</span>
+          </div>
+          <div class="metric">
+            <strong>ERP Focus</strong>
+            <span>Customization, workflow improvement, access control, reporting, and day-to-day operational support.</span>
+          </div>
+          <div class="metric">
+            <strong>Business First</strong>
+            <span>Strong focus on practical implementation, usability, and process clarity for end users.</span>
+          </div>
+        </div>
+        <br/>
+        <div class="section wide">
+        <h2><span></span>Professional Experience</h2>
+        <div class="experience-grid">
+          <article class="experience-item">
+            <div class="experience-head">
+              <p class="experience-title">Asia Matrix</p>
+              <p class="experience-duration">2 Years 5 Months</p>
+            </div>
+            <p class="muted">Odoo-related implementation and customization experience in real business environments.</p>
             
-            <div class="container-fluid">
-                <div>
-                    <a href="index.html" class="navbar-brand ml-lg-3">
-                        <h1 class="m-0 display-5">
-                            My <span class="purple">Portfilo</span>
-                        </h1>
-                    </a>
-                </div>
-                <div>
-                    <!-- button for responsive -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse px-lg-3" id="navbarCollapse">
-                    <div class="navbar-nav m-auto py-0">
-                        <a href="#home" class="nav-item nav-link active">Home</a>
-                        <a href="#about" class="nav-item nav-link">About</a>
-                        <a href="#skill" class="nav-item nav-link">Skill</a>
-                        <a href="#odoo-modules" class="nav-item nav-link">Odoo Module</a>
-                        <a href="#projects" class="nav-item nav-link">Projects</a>
-                        <a href="#profilo" class="nav-item nav-link">Other Gallery</a>
+          </article>
 
-<!--                        <a href="#contact" class="nav-item nav-link">Contact</a>-->
-                    </div> 
-                </div>
-                </div>
-                <!-- dark mood
-                <button class="btn btn-dark p-1 me-3 rounded-circle" id="dark"><i class="fas fa-moon    "></i></button> -->
+          <article class="experience-item">
+            <div class="experience-head">
+              <p class="experience-title">MSIS</p>
+              <p class="experience-duration">1 Year 9 Months</p>
             </div>
-            </nav>
-        <!-- navbar section end -->
-        
-    
-        
-        <!-- header section -->
-        <div class="container-fluid d-flex mb-5 py-5" id="home" style="min-height:100vh;">
-            <div class="container">
-                <div class="row align-items-center">
-
-                    <!-- name section -->
-                    <div class="col-lg-6 hero-text text-center text-lg-start mb-3">
-                        <h3 class="text-white mb-3">Hello, I'm</h3>
-                        <h1 class="display-5 text-primary mb-3 text-uppercase" style="-webkit-text-stroke:4px #fff">Eaint Thwin Kyaw</h1>
-                        <h1 class="typed-text-output d-inline font-weight-lighter gray"></h1>
-                        <!-- typed text -->
-                        <div class="typed-text d-none">
-                            Senior Odoo Developer
-                        </div>
-                        <!-- cv button -->
-                        <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
-                            <a href="https://drive.google.com/file/d/1WVYWyqzoNKjUvK-r_8UqqYWU1lSyZ-od/view?usp=sharing" class="btn btn-dark me-4">Download CV</a>
-                            <!-- <a href="" class="btn btn-blue">About Me</a> -->
-                        </div>
-                    </div>
-
-                    <!-- image -->
-                    <div class="about-img col-lg-6 px-8 pl-lg-0 pb-5 pb-lg-4 mx-auto">
-                        <img src="image/etk_whole.jpg" alt="Profile Picture" class="img-fluid rounded-circle shadow-sm img-profile">
-                    </div>
-
-                </div>
-            </div>
+            <p class="muted">Business system and project support experience with strong exposure to workflow-driven requirements.</p>
+            
+          </article>
         </div>
-        <!-- header section end -->
+      </div>
+      </div>
 
-       <!-- About Section -->
-    <div class="container-fluid py-5" id="about">
-        <div class="container">
-            <div class="position-relative d-flex align-items-center justify-content-center">
-                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke:1px #c8a5ff">
-                    About
-                </h1>
-                <h1 class="position-absolute text-uppercase light-purple">About Me?</h1>
-            </div>
-
-            <div class="row align-items-center">
-                <!-- Left Side: Profile Photo -->
-                <div class="col-lg-4 pb-4 pb-lg-0">
-                    <div class="card shadow-lg rounded border-0">
-                        <img src="image/mine1.jpg" alt="Profile Picture" class="img-fluid rounded-circle w-100">
-                    </div>
-                </div>
-
-                <!-- Right Side: About Me Section + Personal Details -->
-                <div class="col-lg-8">
-                    <!-- About Me Section -->
-                    <div class="card shadow-lg rounded border-0 mb-4">
-                        <div class="card-body">
-                            <h3 class="text-primary mb-3">About Me</h3>
-                            <p class="text-muted">
-                                I am an Odoo Developer with 2 years of experience specializing in the Manufacturing, Retail, Accounting, Supply Chain, and Project Management systems using the Odoo framework. I possess in-depth knowledge of the aforementioned business domains and have advanced proficiency in Python programming, along with strong skills in JavaScript. My expertise enables me to effectively develop and customize Odoo modules to meet specific business requirements, ensuring seamless integration and optimized performance.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Personal Details Section -->
-                    <div class="card shadow-lg rounded border-0 mb-4">
-                        <div class="card-body">
-                            <h5 class="text-primary mb-3">Personal Details</h5>
-                            <div class="row" style="line-height: 1.4;">
-                                <div class="col-sm-6 py-1">
-                                    <h6>Name: <span class="purple">Eaint Thwin Kyaw</span></h6>
-                                </div>
-                                <div class="col-sm-6 py-1">
-                                    <h6>Birthday: <span class="purple">December 10, 2000</span></h6>
-                                </div>
-                                <div class="col-sm-6 py-1">
-                                    <h6>Email: <a href="mailto:eaint2129@gmail.com"><span class="purple">eaint2129@gmail.com</span></a></h6>
-                                </div>
-                                <div class="col-sm-6 py-1">
-                                    <h6>GitHub: <a href="https://github.com/Kailli"><span class="purple">https://github.com/Kailli</span></a></h6>
-                                </div>
-<!--                                 <div class="col-sm-6 py-1">
-                                    <h6>Odoo: <span class="purple">NexOrionis Techsphere</span></h6>
-                                </div> -->
-                                <div class="col-sm-6 py-1">
-                                    <h6>Phone: <span class="purple">+959976289345</span></h6>
-                                </div>
-                                <div class="col-sm-6 py-1">
-                                    <h6>Freelance: <span class="purple">Available</span></h6>
-                                </div>
-                            </div>
-
-                            <!-- Contact Button -->
-                            <div class="mt-4">
-                                <a href="mailto:eaint2129@gmail.com" class="btn btn-purple">Contact Me</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Education and Work Experience Section -->
-            <div class="row">
-                <!-- Left Side: Education -->
-                <div class="col-md-6">
-                    <div class="card shadow-lg rounded border-0 mb-4">
-                        <div class="card-body">
-                            <h5 class="text-primary mb-3">Education</h5>
-                            <div class="mb-3">
-                                <h6 class="mb-1">Computer University (2016 – 2019)</h6>
-                                <span class="text-muted">Third Year (Computer Science)</span>
-                            </div>
-                            <div class="mb-3">
-                                <h6 class="mb-1">Code Lab (2021)</h6>
-                                <span class="text-muted">Full-Stack Development (Laravel Framework) – Pizza Ordering System</span>
-                            </div>
-                            <div class="mb-3">
-                                <h6 class="mb-1">AI Comprehensive (SIC Program)</h6>
-                                <span class="text-muted">1st Runner Up Samsung AI Hackathon 2024</span>
-                            </div>
-                            <div class="mb-3">
-                                <h6 class="mb-1">Docker Essentials (2024)</h6>
-                                <span class="text-muted">Certification in Docker Essentials</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Side: Work Experience -->
-                <div class="col-md-6">
-                    <div class="card shadow-lg rounded border-0 mb-4">
-                        <div class="card-body">
-                            <h5 class="text-primary mb-3">Work Experience</h5>
-                            <div class="mb-3">
-                                <h6 class="mb-1">Asia Matrix – Senior Odoo Developer (2022–2024)</h6>
-                                <span class="text-muted">Started as Junior Odoo Developer, advanced to Mid-level within a year, and achieved Senior Developer status by December 2023.</span>
-                            </div>
-                            <div>
-                                <h6 class="mb-1">MSIS – Senior Odoo Developer (2024)</h6>
-                                <span class="text-muted">Currently working as a Senior Odoo Developer at MSIS.</span>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <aside class="hero-card">
+        <div class="avatar-row">
+          <div class="avatar" onclick="openImageModal()" onkeydown="handleAvatarKeydown(event)" role="button" tabindex="0" aria-label="Open profile photo">
+            <img src="professional_photo.jpg" alt="Portrait of Eaint Thwin Kyaw" />
+          </div>
+          <div class="intro-block">
+            <p class="intro-name">Eaint Thwin Kyaw</p>
+            <!-- <p class="intro-sub">Senior Odoo Developer with experience in ERP design, customization, and operational workflow support.</p> -->
+          </div>
         </div>
+
+        <div class="contact-list">
+          <div class="contact-line">
+            <strong>Birthday</strong>
+            <span>December 19, 2000</span>
+          </div>
+          <div class="contact-line">
+            <strong>Location</strong>
+            <span>Yangon, Myanmar</span>
+          </div>
+          <div class="contact-line">
+            <strong>Education</strong>
+            <span class="contact-detail">EIU Paris, B.Sc Data Science and Technology, Final Year</span>
+            <span class="contact-detail">AWS Solutions Architect Associate(Ongoing)</span>
+          </div>
+          <div class="contact-line">
+            <strong>Email</strong>
+            <a href="mailto:eaint2129@gmail.com">eaint2129@gmail.com</a>
+          </div>
+          <div class="contact-line">
+            <strong>Viber/Phone</strong>
+            <a href="tel:+959976289345">+959976289345</a>
+          </div>
+          <div class="contact-line">
+            <strong>Languages</strong>
+            <span class="contact-detail">English B2 (B1(Ongoing))</span>
+            <span class="contact-detail">Japanese N4</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="content">
+      
+
+      <div class="section">
+        <h2><span></span>Core Skills</h2>
+        <div class="skill-tags">
+          <div class="tag">Odoo Customization</div>
+          <div class="tag">Python</div>
+          <div class="tag">XML</div>
+          <div class="tag">PostgreSQL</div>
+          <div class="tag">QWeb Reports</div>
+          <div class="tag">Access Control</div>
+          <div class="tag">Module Enhancement</div>
+          <div class="tag">Workflow Automation</div>
+          <div class="tag">Business Analysis</div>
+          <div class="tag">Server</div>
+          <div class="tag">AWS Cloud</div>
+          <div class="tag">Docker</div>
+          <div class="tag">Ubuntu</div>
+          <div class="tag">Nginx</div>
+          <div class="tag">React Native</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><span></span>Professional Profile</h2>
+        <div class="facts-grid">
+          <div class="fact-card">
+            <strong>ERP Modules</strong>
+            <p>Sales, Purchase, Inventory, HR, Budget, Banking System, reporting, and custom internal process flows.</p>
+          </div>
+          <div class="fact-card">
+            <strong>Delivery Style</strong>
+            <p>Clear structure, business-friendly design, and maintainable customization aligned with workflow needs.</p>
+          </div>
+          <div class="fact-card">
+            <strong>Communication</strong>
+            <p>Comfortable supporting users, understanding business requirements, and explaining system logic clearly.</p>
+          </div>
+          <div class="fact-card">
+            <strong>Career Direction</strong>
+            <p>Focused on growing as a senior Odoo developer through impactful ERP delivery and strong project ownership.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section wide">
+        <h2><span></span>Public Odoo Work</h2>
+        <p class="section-intro">
+          I also share public Odoo work through free modules and beginner-friendly knowledge sharing. These resources reflect both my practical development experience and my ability to explain Odoo clearly for others.
+        </p>
+        <div class="apps-grid">
+          <article class="app-card">
+            <h3>Free Odoo Modules</h3>
+            <p>My public Odoo Apps listing includes modules such as Row Number in List, Color Picker Widget, Disable Easy Create, Lots Expiration Dashboard, Qweb Report Elements, Customer Scanner, Spare Part Management, and Payroll Auto Generate.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/browse?author=NexOrionis+Techsphere" target="_blank" rel="noopener noreferrer">View Odoo Apps Profile</a>
+          </article>
+          <article class="app-card">
+            <h3>Free Odoo Learning Content</h3>
+            <p>I also share beginner-friendly Odoo knowledge on YouTube, helping new learners understand practical usage, implementation basics, and platform concepts more easily.</p>
+            <a class="app-link" href="https://youtube.com/playlist?list=PL5FiB2NXD2IA7f8KM2dH7m--md8xXRwLS&si=QQ6ut73iKF5dn1rA" target="_blank" rel="noopener noreferrer">Watch YouTube Playlist</a>
+          </article>
+        </div>
+      </div>
+
+      <div class="section wide">
+        <h2><span></span>Project Highlights</h2>
+        <p class="section-intro">
+          The following project highlights represent major implementation areas I worked on across Odoo backend, mobile integration, workflow customization, and business process development.
+        </p>
+        <div class="screenshots">
+          <article class="shot-card">
+            <div class="shot-copy">
+              <h3>Daily HR Backend and Mobile Integration</h3>
+              <p>Worked on the full Daily HR backend and mobile-related project scope, including multi-company support, face recognition, ZKT integration, HR feature setup in backend, frontend API delivery, user token handling, and approval process flow through API.</p>
+              <div class="shot-meta">
+                <span>Multi Company</span>
+                <span>Face Recognition</span>
+                <span>API Approval Flow</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="shot-card">
+            <div class="shot-copy">
+              <h3>Bank Budget Planning System</h3>
+              <p>Customized the full budget planning and budget process flow, including monthly planning input outside the default Odoo form style, using modified widgets with inline toggle behavior for each month and a fully tailored process structure.</p>
+              <div class="shot-meta">
+                <span>Budget Planning</span>
+                <span>Custom Widget</span>
+                <span>Process Customization</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="shot-card">
+            <div class="shot-copy">
+              <h3>Mini App Integration Role</h3>
+              <p>Contributed from the backend developer role for mini app integration, focusing on backend-side logic, integration flow, and support for business features consumed by connected applications.</p>
+              <div class="shot-meta">
+                <span>Backend Role</span>
+                <span>Integration Flow</span>
+                <span>Business Logic</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="shot-card">
+            <div class="shot-copy">
+              <h3>Trading and POS Custom Flow</h3>
+              <p>Worked on trading workflow customization, POS custom flow improvements, and multi UOM support across both POS and backend to align the system with practical sales and operational requirements.</p>
+              <div class="shot-meta">
+                <span>Trading Flow</span>
+                <span>POS Customization</span>
+                <span>Multi UOM</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="section wide">
+        <div class="note-grid">
+          <div>
+            <h2><span></span>Portfolio Note</h2>
+            <ul class="note-list">
+              <li>Some client source code and full project details cannot be shared publicly because of confidentiality requirements.</li>
+              <li>I can still explain project architecture, workflow design, customization approach, and implementation logic in a professional discussion.</li>
+              <li>This portfolio is intended to highlight relevant experience, delivery style, and Odoo-focused capability for senior-level opportunities.</li>
+            </ul>
+          </div>
+          <div>
+            <h2><span></span>Why Management Can Remember Me</h2>
+            <div class="remember-card">
+              <strong>Professional Value</strong>
+              <p>I bring a balanced mindset of technical customization and business process awareness, with strong focus on usability, clarity, and real operational value inside Odoo.</p>
+              <div class="remember-contact">
+                <span><strong>Name:</strong> Eaint Thwin Kyaw (Viber +959976289345) </span>
+                
+                <!-- <a href="http://www.linkedin.com/in/eaint-thwin-kyaw" target="_blank" rel="noopener noreferrer"><strong>LinkedIn:</strong> linkedin.com/in/eaint-thwin-kyaw</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        <p><strong>Open for senior Odoo opportunities:</strong> I am interested in roles involving Odoo customization, ERP process improvement, system enhancement, and business-focused solution delivery.</p>
+        <button class="button" onclick="showMessage()">View Message</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Senior Odoo portfolio focused on practical ERP delivery, maintainable customization, and business-driven workflow improvement.
+    </footer>
+  </main>
+
+  <div class="image-modal" id="imageModal" onclick="closeImageModal(event)">
+    <div class="image-modal-content">
+      <button class="image-modal-close" type="button" aria-label="Close image" onclick="closeImageModal(event)">&times;</button>
+      <img src="professional_photo.jpg" alt="Full size portrait of Eaint Thwin Kyaw" />
     </div>
-    <!-- About Section End -->
+  </div>
 
+  <div class="message-modal" id="messageModal" onclick="closeMessageModal(event)">
+    <div class="message-modal-card">
+      <span class="message-modal-label">Portfolio Message</span>
+      <h3>Thank you for reviewing my portfolio.</h3>
+      <p>I would be glad to discuss senior Odoo development opportunities, ERP customization, backend and mobile integration, workflow improvement, and business-focused solution delivery.</p>
+      <div class="message-modal-actions">
+        <button class="message-close-btn" type="button" onclick="closeMessageModal()">Close Message</button>
+        <a class="message-quick-link" href="mailto:eaint2129@gmail.com">Contact by Email</a>
+      </div>
+    </div>
+  </div>
 
+  <script>
+    function showMessage() {
+      document.getElementById("messageModal").classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
 
-    
-    
-    
-    
-    
-        <!-- Skill Section -->
-    
-        <div class="container-fluid py-5" id="skill">
-            <div class="position-relative align-items-center d-flex justify-content-center">
-                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke:1px #c8a5ff">
-                    Skill
-                    </h1>
-                    <h1 class="position-absolute text-uppercase light-purple">My Skills</h1>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-md-6">
-    
-                    <div class="skill mb-4">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-bold">Python</h6>
-                            <h6 class="font-weight-bold">80%</h6>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" style="width:80%" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-    
-                    <div class="skill mb-4">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-bold">Javascript</h6>
-                            <h6 class="font-weight-bold">80%</h6>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" style="width:80%" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-    
-                    <div class="skill mb-4">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-bold">React</h6>
-                            <h6 class="font-weight-bold">60%</h6>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" style="width:60%" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-    
-                    <div class="skill mb-4">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-bold">Odoo</h6>
-                            <h6 class="font-weight-bold">95%</h6>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" style="width:95%" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-    
-                </div>
-    
-                <div class="col-md-6">
-    
-                    <div class="skill mb-4">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-bold">Bootstrap</h6>
-                            <h6 class="font-weight-bold">80%</h6>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" style="width:80%" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-    
-                    <div class="skill mb-4">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-bold">AI</h6>
-                            <h6 class="font-weight-bold">50%</h6>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" style="width:50%" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-    
-                    <div class="skill mb-4">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-bold">NodeJs</h6>
-                            <h6 class="font-weight-bold">40%</h6>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" style="width:40%" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-    
-                    <div class="skill mb-4">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-bold">Laravel</h6>
-                            <h6 class="font-weight-bold">60%</h6>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" style="width:60%" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-    
-                </div>
-            </div>
-        </div>
-    
-        <!-- Skill Section End -->
+    function openImageModal() {
+      document.getElementById("imageModal").classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
 
+    function closeImageModal(event) {
+      if (!event || event.target.id === "imageModal" || event.target.classList.contains("image-modal-close")) {
+        document.getElementById("imageModal").classList.remove("open");
+        if (!document.getElementById("messageModal").classList.contains("open")) {
+          document.body.style.overflow = "";
+        }
+      }
+    }
 
-        <!-- Odoo Module -->
+    function closeMessageModal(event) {
+      if (!event || event.target.id === "messageModal") {
+        document.getElementById("messageModal").classList.remove("open");
+        if (!document.getElementById("imageModal").classList.contains("open")) {
+          document.body.style.overflow = "";
+        }
+      }
+    }
 
-        <div class="container-fluid py-5" id="odoo-modules">
-            <div class="container">
-                <div class="position-relative align-items-center d-flex justify-content-center">
-                    <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke:1px #c8a5ff">
-                        Odoo Apps
-                    </h1>
-                    <h1 class="position-absolute text-uppercase light-purple">Odoo App Store</h1>
-                </div>
-                <div class="row text-center">
-                    <div class="col-sm-6 mb-3">
-                        <a href="https://apps.odoo.com/apps/modules/17.0/nexus_disable_quick_create" target="_blank" class="btn btn-info">
-                            Hide Create and Edit (V17)
-                        </a>
-                    </div>
-                    <div class="col-sm-6 mb-3">
-                        <a href="https://apps.odoo.com/apps/modules/17.0/qweb_report_element" target="_blank" class="btn btn-info">
-                            QWeb Element (V17, V15)
-                        </a>
-                    </div>
-                    <div class="col-sm-6 mb-3">
-                        <a href="https://apps.odoo.com/apps/modules/15.0/auto_payroll_generate" target="_blank" class="btn btn-info">
-                            Payroll Auto Generate (V15)
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    function handleAvatarKeydown(event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openImageModal();
+      }
+    }
 
-        <!-- Odoo Module -->
-
-
-        <!-- Project Section -->
-
-        <div class="container-fluid py-5" id="projects">
-            <div class="container">
-                <div class="position-relative align-items-center d-flex justify-content-center">
-                    <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke:1px #c8a5ff">
-                        Projects
-                    </h1>
-                    <h1 class="position-absolute text-uppercase light-purple">Project Structure</h1>
-                </div>
-
-                <div class="row">
-                    <!-- Pharmacy Project -->
-                    <div class="col-md-12 mb-5">
-                        <div class="card border-0 shadow-lg rounded-lg p-4">
-                            <div class="card-body">
-                                <h4 class="text-uppercase text-primary mb-3">Pharmacy (Odoo v15)</h4>
-                                <p class="text-muted mb-2"><strong>Deployed and customized solutions for 3 pharmacies, including:</strong></p>
-                                <div class="mb-2">
-                                    <span class="badge bg-success text-white">Lot Tracking</span>
-                                    <span class="badge bg-warning text-dark">Multi-UoM Support</span>
-                                    <span class="badge bg-info text-white">POS Customization</span>
-                                </div>
-                                <p class="text-muted">Created custom PDF and Excel reports for 1 pharmacy.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Migration Project -->
-                    <div class="col-md-12 mb-5">
-                        <div class="card border-0 shadow-lg rounded-lg p-4">
-                            <div class="card-body">
-                                <h4 class="text-uppercase text-primary mb-3">Migration to Odoo v17</h4>
-                                <p class="text-muted mb-2"><strong>Migrated modules and features from v15 to v17, including:</strong></p>
-                                <div class="mb-2">
-                                    <span class="badge bg-success text-white">JS Dashboards</span>
-                                    <span class="badge bg-info text-white">POS Customizations</span>
-                                    <span class="badge bg-danger text-white">Promotion Programs</span>
-                                </div>
-                                <p class="text-muted">Implemented Stock Warehouse and Location Access Rights with Stock Requisition for v15, v16, and v17.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Waiter Robot Project -->
-                    <div class="col-md-12 mb-5">
-                        <div class="card border-0 shadow-lg rounded-lg p-4">
-                            <div class="card-body">
-                                <h4 class="text-uppercase text-primary mb-3">Waiter Robot (React + AI)</h4>
-                                <p class="text-muted">Integrated chatbot AI with a React app to control a robot for the <strong>Samsung Hackathon 2024</strong>.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Project Section End -->
-
-    
-        <!-- profilo section -->
-    
-        <div class="container-fluid pt-5 pb-3" id="profilo">
-            <div class="container">
-                <div class="position-relative align-items-center d-flex justify-content-center">
-                    <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke:1px #c8a5ff">
-                        Gallary
-                        </h1>
-                        <h1 class="position-absolute text-uppercase light-purple">My Portfilos</h1>
-                </div>
-    
-                <div class="row justify-content-center mb-3">
-                    <div class="col-sm-4">
-                      <div class="card">
-                        <div class="card-body text-center">
-                          <h4 class="card-title">Food Ordering <br> <span class="purple">(UI Design)</span></h4>
-                          <p class="card-text">
-                            Create With HTML, CSS, JS. <br> 
-                            You can only see UI design of Web Side and you can test buttons.
-                            This is just presentation project.
-                         </p>
-                          <a href="https://kailli.github.io/Food_Order_Webside/" class="btn btn-info">Demo</a>
-                          <a href="https://github.com/Kailli/Food_Order_Webside" class="btn btn-dark">Code</a>
-                        </div>
-                      </div>
-                    </div>
-    
-                    <div class="col-sm-4">
-                        <div class="card">
-                          <div class="card-body text-center">
-                            <h4 class="card-title">Calculator <br> <span class="purple">(Design & Development)</span></h4>
-                            <p class="card-text">
-                              Create With HTML, CSS, JS. <br> 
-                              You can see with dark mood and day mood. This code is simple and pretty design.
-                           </p>
-                            <a href="https://kailli.github.io/Calculator/" class="btn btn-info">Demo</a>
-                            <a href="https://github.com/Kailli/Calculator" class="btn btn-dark">Code</a>
-                          </div>
-                        </div>
-                      </div>
-    
-                      <div class="col-sm-4">
-                        <div class="card">
-                          <div class="card-body text-center">
-                            <h4 class="card-title">To Do List <br> <span class="purple">(Development)</span></h4>
-                            <p class="card-text">
-                              Create With HTML, CSS, JS. <br> 
-                              You can add your daily activity and can check comple and incomplete.
-                              And also delete that you completed.
-                           </p>
-                            <a href="https://kailli.github.io/ToDoList/" class="btn btn-info">Demo</a>
-                            <a href="https://github.com/Kailli/ToDoList" class="btn btn-dark">Code</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-    
-                    <div class="row justify-content-center">
-    
-                        <div class="col-sm-4">
-                            <div class="card">
-                              <div class="card-body text-center">
-                                <h4 class="card-title">Card Game <br> <span class="purple">(Design & Development)</span></h4>
-                                <p class="card-text">
-                                  Create With HTML, CSS, JS. <br> 
-                                  You can play the two same card to match. If you refresh, it change to next random card.
-                               </p>
-                                <a href="https://kailli.github.io/Card-Game-JS-/" class="btn btn-info">Demo</a>
-                                <a href="https://github.com/Kailli/Card-Game-JS-" class="btn btn-dark">Code</a>
-                              </div>
-                            </div>
-                          </div>
-    
-                        <div class="col-sm-4">
-                          <div class="card">
-                            <div class="card-body text-center">
-                              <h4 class="card-title">Chat <br> <span class="purple">(Backend)</span></h4>
-                              <p class="card-text">
-                                Create With HTML, CSS, JS, Node.js and express. <br> 
-                                Testing Websocket. You can text by each id address.
-                             </p>
-                              <a href="https://github.com/Kailli/Chat-Basic" class="btn btn-dark">Code</a>
-                            </div>
-                          </div>
-                        </div>
-        
-                          <div class="col-sm-4">
-                            <div class="card">
-                              <div class="card-body text-center">
-                                <h5 class="card-title">Pizza Ordering<span class="purple">(Laravel)</span></h5>
-                                <p class="card-text">
-                                  Create With HTML, CSS, PHP, Laravel and mysql. <br> 
-                                  This have admin role and user roles(You can register and log in).
-                               </p>
-                                <a href="https://drive.google.com/file/d/1ResOIufclLtBdRtXVSTi-4gmMlpAAqPX/view?usp=sharing" class="btn btn-info">User</a>
-                                <a href="https://drive.google.com/file/d/1x-zWmGgKYEVzWC_Oo7S8TVJczsmOdY0J/view?usp=sharing" class="btn btn-info">Admin</a>
-                                <a href="https://github.com/Kailli/Pizza-Order-System" class="btn btn-dark">Code</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-            </div>
-        </div>
-    
-        <!-- profilo section end -->
-    
-    
-    
-    
-    
-<!--        &lt;!&ndash; Contact Us Section &ndash;&gt;-->
-<!--    -->
-<!--        <div class="container-fluid py-5" id="contact">-->
-<!--            <div class="container">-->
-<!--                <div class="position-relative align-items-center d-flex justify-content-center">-->
-<!--                    <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke:1px #c8a5ff">-->
-<!--                        Contact-->
-<!--                        </h1>-->
-<!--                        <h1 class="position-absolute text-uppercase light-purple">Contace Me</h1>-->
-<!--                </div>-->
-<!--    -->
-<!--                <div class="row justify-content-center">-->
-<!--                    <div class="col-lg-8">-->
-<!--                        <div class="contact-form text-center">-->
-<!--                            <div id="success"></div>-->
-<!--                            <form action="" name="sendMessage" id="contactForm" novalidate="novalidate">-->
-<!--                                <div class="form-row">-->
-<!--                                    <div class="control-group col-sm-auto">-->
-<!--                                        <input type="text" class="form-control m-3" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please Enter Your Name">-->
-<!--                                    </div>-->
-<!--                                    <div class="control-group col-sm-auto">-->
-<!--                                        <input type="email" class="form-control m-3" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please Enter Your Email">-->
-<!--                                        <p class="help-block text-danger"></p>-->
-<!--                                    </div>-->
-<!--                                    <div class="control-group col-sm-auto">-->
-<!--                                        <textarea class="form-control m-3" id="message" rows="3" placeholder="Your Message" required="required"></textarea>-->
-<!--                                        <p class="help-block text-danger"></p>-->
-<!--                                    </div>-->
-<!--        -->
-<!--                                    <div>-->
-<!--                                        <button class="btn btn-outline-info btn-dark" type="submit" id="submit">Send Message</button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </form>-->
-<!--                        </div>-->
-<!--    -->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                -->
-<!--            </div>-->
-<!--        </div>-->
-<!--    -->
-<!--        &lt;!&ndash; Contact Us Section End &ndash;&gt;-->
-    
-    
-    
-    
-    
-    
-        <!-- Footer Section -->
-    
-        <div class="container-fluid mt-5 py-1 px-sm-1 px-md-5" style="background:#1e1e2e; color:#dcdcdc">
-        <div class="container text-center py-5">
-            <div class="d-flex justify-content-center mb-4">
-                <a href="https://www.facebook.com/kaillichae.chae" class="btn btn-blue btn-social me-2"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                <a href="https://www.instagram.com/kailli.chae.chae/" class="btn btn-blue btn-social me-2"><i class="fab fa-instagram"></i></a>
-                <a href="https://twitter.com/kaillichae10?t=glInUnkXlJQCsAQ5zJNQjA&s=09" class="btn btn-blue btn-social me-2"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                <a href="https://www.linkedin.com/in/eaint-thwin-kyaw-015581238" class="btn btn-blue btn-social me-2"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <div class="d-flex justify-content-center mb-4">
-                <p>This Page is used By HTML, CSS, Bootstrap and JQuery.</p>
-            </div>
-            <div class="d-flex justify-content-center mb-4">
-                <p class="purple">All Rights Reserved</p>
-            </div>
-            <div class="d-flex justify-content-center mb-4">
-            <h6>Design By</h6>
-                <h6 class="purple"><i class="fa-solid fa-heart"></i> Kailli </h6>
-            </div>
-            <div class="d-flex justify-content-center mb-4">
-                <span class="purple">............................................................................................................................................</span>
-            </div>
-        </div>
-        </div>
-
-    
-        <!-- Footer Section End -->
-    
-    
-    
-    
-     </div>
-
-
-
-    <!-- bootstrap js -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- jquery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- js code -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- custom js -->
-    <script src="script.js"></script>
-
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        closeImageModal();
+        closeMessageModal();
+      }
+    });
+  </script>
 </body>
 </html>

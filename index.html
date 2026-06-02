@@ -56,6 +56,44 @@
       box-shadow: var(--shadow);
     }
 
+    .portfolio-tabs {
+      display: flex;
+      gap: 10px;
+      padding: 16px 54px;
+      background: rgba(15, 11, 19, 0.96);
+      border-bottom: 1px solid rgba(216, 191, 216, 0.12);
+    }
+
+    .portfolio-tab {
+      min-height: 42px;
+      padding: 10px 18px;
+      border: 1px solid rgba(216, 191, 216, 0.16);
+      border-radius: 999px;
+      color: #d6c8dc;
+      background: rgba(255, 255, 255, 0.04);
+      font-family: "Manrope", sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .portfolio-tab:hover {
+      transform: translateY(-2px);
+      color: #ffffff;
+    }
+
+    .portfolio-tab.active {
+      color: #ffffff;
+      background: linear-gradient(135deg, #cbb2d3, #9f82b0);
+      border-color: transparent;
+      box-shadow: 0 12px 22px rgba(120, 93, 133, 0.22);
+    }
+
+    .tab-panel[hidden] {
+      display: none;
+    }
+
     .hero {
       position: relative;
       display: grid;
@@ -593,6 +631,97 @@
       border-top: 1px solid rgba(216, 191, 216, 0.1);
     }
 
+    .odoo-apps-panel {
+      padding: 48px 54px 54px;
+    }
+
+    .odoo-apps-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .odoo-apps-head h2 {
+      margin-bottom: 10px;
+    }
+
+    .odoo-apps-head .section-intro {
+      max-width: 760px;
+      margin-bottom: 0;
+    }
+
+    .odoo-apps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .odoo-app-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(38, 30, 47, 0.94), rgba(24, 19, 31, 0.96));
+      border: 1px solid rgba(216, 191, 216, 0.12);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .odoo-app-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(216, 191, 216, 0.12);
+    }
+
+    .odoo-app-copy {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 18px;
+    }
+
+    .odoo-app-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .odoo-app-meta span {
+      padding: 6px 9px;
+      border-radius: 999px;
+      color: #eadcf0;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(216, 191, 216, 0.12);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .odoo-app-card h3 {
+      color: #ffffff;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .odoo-app-card p {
+      flex: 1;
+      margin: 9px 0 16px;
+      color: #c0b0c4;
+      font-size: 14px;
+      line-height: 1.68;
+    }
+
+    .odoo-app-card .app-link {
+      align-self: flex-start;
+      min-height: 40px;
+      padding: 9px 15px;
+      font-size: 12px;
+    }
+
     .image-modal,
     .message-modal {
       position: fixed;
@@ -734,6 +863,12 @@
         padding: 0 44px 44px;
       }
 
+      .portfolio-tabs,
+      .odoo-apps-panel {
+        padding-left: 44px;
+        padding-right: 44px;
+      }
+
       h1 {
         font-size: clamp(38px, 4.8vw, 60px);
       }
@@ -758,6 +893,16 @@
 
       .content {
         padding-bottom: 36px;
+      }
+
+      .portfolio-tabs,
+      .odoo-apps-panel {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .odoo-apps-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .hero-metrics,
@@ -820,6 +965,30 @@
       .hero {
         padding-top: 22px;
         padding-bottom: 22px;
+      }
+
+      .portfolio-tabs,
+      .odoo-apps-panel {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .portfolio-tabs {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .odoo-apps-panel {
+        padding-top: 30px;
+        padding-bottom: 32px;
+      }
+
+      .odoo-apps-head {
+        display: grid;
+      }
+
+      .odoo-apps-grid {
+        grid-template-columns: 1fr;
       }
 
       .hero-actions {
@@ -903,6 +1072,12 @@
         padding-right: 14px;
       }
 
+      .portfolio-tabs,
+      .odoo-apps-panel {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
       .hero-card,
       .section,
       .note {
@@ -953,6 +1128,12 @@
 </head>
 <body>
   <main class="portfolio">
+    <nav class="portfolio-tabs" aria-label="Portfolio sections">
+      <button class="portfolio-tab active" type="button" data-tab="portfolio" aria-selected="true">Portfolio</button>
+      <button class="portfolio-tab" type="button" data-tab="odoo-apps" aria-selected="false">Odoo Apps</button>
+    </nav>
+
+    <div class="tab-panel" id="portfolio-panel">
     <section class="hero">
       <div class="hero-copy">
         <h1>Eaint Thwin Kyaw</h1>
@@ -1095,7 +1276,7 @@
           <article class="app-card">
             <h3>Free Odoo Modules</h3>
             <p>My public Odoo Apps listing includes modules such as Row Number in List, Color Picker Widget, Disable Easy Create, Lots Expiration Dashboard, Qweb Report Elements, Customer Scanner, Spare Part Management, and Payroll Auto Generate.</p>
-            <a class="app-link" href="https://apps.odoo.com/apps/modules/browse?author=NexOrionis+Techsphere" target="_blank" rel="noopener noreferrer">View Odoo Apps Profile</a>
+            <a class="app-link" href="https://apps.odoo.com/apps/browse?repo_maintainer_id=667562" target="_blank" rel="noopener noreferrer">View Odoo Apps Profile</a>
           </article>
           <article class="app-card">
             <h3>Free Odoo Learning Content</h3>
@@ -1191,6 +1372,149 @@
         <button class="button" onclick="showMessage()">View Message</button>
       </div>
     </section>
+    </div>
+
+    <section class="tab-panel odoo-apps-panel" id="odoo-apps-panel" hidden>
+      <div class="odoo-apps-head">
+        <div>
+          <h2><span></span>Odoo Apps</h2>
+          <p class="section-intro">Explore my published Odoo modules for practical ERP improvements, POS enhancements, reporting, and business workflow support.</p>
+        </div>
+        <a class="app-link" href="https://apps.odoo.com/apps/browse?repo_maintainer_id=667562" target="_blank" rel="noopener noreferrer">View All on Odoo Apps</a>
+      </div>
+
+      <div class="odoo-apps-grid">
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30285333" alt="Myanmar NRC Format app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 19</span><span>Free</span></div>
+            <h3>Myanmar NRC Format</h3>
+            <p>Myanmar National Registration Card format for sale orders.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/19.0/noi_myanmar_nrc_format" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30284424" alt="POS Fixed Discount app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 18</span><span>Free</span></div>
+            <h3>POS Fixed Discount</h3>
+            <p>Allow fixed amount discounts on POS order lines.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/18.0/noi_pos_fixed_discount" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30286560" alt="Hide Action Delete app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 15</span><span>Free</span></div>
+            <h3>Hide Action Delete</h3>
+            <p>Hide the delete button from actions where removal should be restricted.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/15.0/noi_hide_delete_action" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30284389" alt="Qweb Report Elements app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 17</span><span>Free</span></div>
+            <h3>Qweb Report Elements</h3>
+            <p>Reusable QWeb report elements for Odoo reporting customizations.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/17.0/qweb_report_element" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30284397" alt="Disable Easy Create app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 17</span><span>Free</span></div>
+            <h3>Disable Easy Create</h3>
+            <p>Disable quick creation to keep relational records structured and controlled.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/17.0/nexus_disable_quick_create" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30284392" alt="Lots Expiration Dashboard app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 17</span><span>Free</span></div>
+            <h3>Lots Expiration Dashboard</h3>
+            <p>Show expired inventory lots from an accessible dashboard view.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/17.0/noi_expired_lots" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30284396" alt="Row Number in List app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 17</span><span>Free</span></div>
+            <h3>Row Number in List</h3>
+            <p>Show a row number in Odoo tree and list views.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/17.0/noi_row" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30286558" alt="Spare Part Management app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 15</span><span>Free</span></div>
+            <h3>Spare Part Management</h3>
+            <p>Manage spare parts for products in Odoo.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/15.0/noi_spare_part_management" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30284393" alt="Color Picker Widget app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 17</span><span>Free</span></div>
+            <h3>Color Picker Widget</h3>
+            <p>Add a color picker widget for character fields.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/17.0/noi_color_picker" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30284390" alt="Customer Scanner app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 17</span><span>Free</span></div>
+            <h3>Customer Scanner</h3>
+            <p>Scan member customers in the Odoo Point of Sale interface.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/17.0/noi_pos_customer_scanner" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30284446" alt="Enterprise-inspired backend experience app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 17</span><span>Paid</span></div>
+            <h3>Enterprise-inspired Backend Experience</h3>
+            <p>Enterprise-style main menu and navigation module for the Odoo backend.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/17.0/noi_backend_theme" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30286557" alt="Payroll Auto Generate app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 15</span><span>Free</span></div>
+            <h3>Payroll Auto Generate</h3>
+            <p>Automatically generate payroll for employees based on a schedule.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/15.0/auto_payroll_generate" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+
+        <article class="odoo-app-card">
+          <img class="odoo-app-image" src="https://apps.odoocdn.com/apps/module_image?image_id=30284425" alt="Target Discount Configuration app preview" loading="lazy" />
+          <div class="odoo-app-copy">
+            <div class="odoo-app-meta"><span>Odoo 18</span><span>Free</span></div>
+            <h3>Target Discount Configuration</h3>
+            <p>Apply global discounts based on customer historical invoice totals.</p>
+            <a class="app-link" href="https://apps.odoo.com/apps/modules/18.0/noi_target_discount" target="_blank" rel="noopener noreferrer">View App</a>
+          </div>
+        </article>
+      </div>
+    </section>
 
     <footer class="footer">
       Senior Odoo portfolio focused on practical ERP delivery, maintainable customization, and business-driven workflow improvement.
@@ -1217,6 +1541,22 @@
   </div>
 
   <script>
+    document.querySelectorAll(".portfolio-tab").forEach(function(tab) {
+      tab.addEventListener("click", function() {
+        var selectedTab = tab.dataset.tab;
+
+        document.querySelectorAll(".portfolio-tab").forEach(function(button) {
+          var isActive = button === tab;
+          button.classList.toggle("active", isActive);
+          button.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        document.querySelectorAll(".tab-panel").forEach(function(panel) {
+          panel.hidden = panel.id !== selectedTab + "-panel";
+        });
+      });
+    });
+
     function showMessage() {
       document.getElementById("messageModal").classList.add("open");
       document.body.style.overflow = "hidden";
